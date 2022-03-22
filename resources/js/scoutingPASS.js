@@ -17,8 +17,7 @@ const options = { // eslint-disable-line
 }
 
 // Must be filled in: e=event, m=match#, l=level(q,qf,sf,f), t=team#, r=robot(r1,r2,b1..), s=scouter
-const requiredFields = ['e', 'm', 'l', 'r', 's', 'as']
-const requiredFieldsMap = { e: 'Event', m: 'Match', l: 'Match Level', r: 'Robot', s: 'Scouter Initials', as: 'Auto Start Position' }
+const requiredFieldsMap = {e: 'Event', m: 'Match', l: 'Match Level', r: 'Robot', s: 'Scouter Initials'}
 
 function addCounter (table, idx, name, data) {
   const row = table.insertRow(idx)
@@ -479,7 +478,7 @@ function validateData () {
   let ret = true
   let errStr = 'Incorrect Fields: '
   let rf = ''
-  for (rf of requiredFields) {
+  for (rf of requiredFieldsMap.length()) {
     // Robot requires special (radio) validation
     if (rf === 'r') {
       if (!validateRobot()) {
