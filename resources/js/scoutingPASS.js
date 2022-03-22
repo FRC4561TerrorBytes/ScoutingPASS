@@ -478,7 +478,7 @@ function validateData () {
   let ret = true
   let errStr = 'Incorrect Fields: '
   let rf = ''
-  for (rf of requiredFieldsMap.length()) {
+  for (rf of Object.keys(requiredFieldsMap).length) {
     // Robot requires special (radio) validation
     if (rf === 'r') {
       if (!validateRobot()) {
