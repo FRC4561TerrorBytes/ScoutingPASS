@@ -58,71 +58,71 @@ function addCounter (table, idx, name, data) {
   return idx + 1
 }
 
-function addFieldImage (table, idx, name, data) {
-  let row = table.insertRow(idx)
-  idx += 1
-  let cell = row.insertCell(0)
-  cell.setAttribute('colspan', 2)
-  cell.setAttribute('style', 'text-align: center;')
-  cell.innerHTML = name
+// function addFieldImage (table, idx, name, data) {
+//   let row = table.insertRow(idx)
+//   idx += 1
+//   let cell = row.insertCell(0)
+//   cell.setAttribute('colspan', 2)
+//   cell.setAttribute('style', 'text-align: center;')
+//   cell.innerHTML = name
 
-  row = table.insertRow(idx)
-  idx += 1
-  cell = row.insertCell(0)
-  cell.setAttribute('colspan', 2)
-  cell.setAttribute('style', 'text-align: center;')
-  const undoButton = document.createElement('button')
-  undoButton.setAttribute('type', 'checkbox')
-  undoButton.setAttribute('onclick', 'undo(this.parentElement)')
-  undoButton.innerHTML += 'Undo'
-  undoButton.setAttribute('id', 'undo_' + data.code)
-  undoButton.setAttribute('class', 'undoButton')
-  cell.appendChild(undoButton)
+//   row = table.insertRow(idx)
+//   idx += 1
+//   cell = row.insertCell(0)
+//   cell.setAttribute('colspan', 2)
+//   cell.setAttribute('style', 'text-align: center;')
+//   const undoButton = document.createElement('button')
+//   undoButton.setAttribute('type', 'checkbox')
+//   undoButton.setAttribute('onclick', 'undo(this.parentElement)')
+//   undoButton.innerHTML += 'Undo'
+//   undoButton.setAttribute('id', 'undo_' + data.code)
+//   undoButton.setAttribute('class', 'undoButton')
+//   cell.appendChild(undoButton)
 
-  row = table.insertRow(idx)
-  idx += 1
-  cell = row.insertCell(0)
-  cell.setAttribute('colspan', 2)
-  cell.setAttribute('style', 'text-align: center;')
-  const canvas = document.createElement('canvas')
-  // canvas.onclick = onFieldClick;
-  canvas.setAttribute('onclick', 'onFieldClick(event)')
-  canvas.setAttribute('class', 'field-image-src')
-  canvas.setAttribute('id', 'canvas_' + data.code)
-  canvas.innerHTML = 'No canvas support'
-  cell.appendChild(canvas)
+//   row = table.insertRow(idx)
+//   idx += 1
+//   cell = row.insertCell(0)
+//   cell.setAttribute('colspan', 2)
+//   cell.setAttribute('style', 'text-align: center;')
+//   const canvas = document.createElement('canvas')
+//   // canvas.onclick = onFieldClick;
+//   canvas.setAttribute('onclick', 'onFieldClick(event)')
+//   canvas.setAttribute('class', 'field-image-src')
+//   canvas.setAttribute('id', 'canvas_' + data.code)
+//   canvas.innerHTML = 'No canvas support'
+//   cell.appendChild(canvas)
 
-  row = table.insertRow(idx)
-  idx += 1
-  row.setAttribute('style', 'display:none')
-  cell = row.insertCell(0)
-  cell.setAttribute('colspan', 2)
-  let inp = document.createElement('input')
-  inp.setAttribute('type', 'hidden')
-  inp.setAttribute('id', 'XY_' + data.code)
-  inp.setAttribute('value', '')
-  cell.appendChild(inp)
-  inp = document.createElement('input')
-  inp.setAttribute('hidden', '')
-  inp.setAttribute('id', 'input_' + data.code)
-  inp.setAttribute('value', '')
-  cell.appendChild(inp)
+//   row = table.insertRow(idx)
+//   idx += 1
+//   row.setAttribute('style', 'display:none')
+//   cell = row.insertCell(0)
+//   cell.setAttribute('colspan', 2)
+//   let inp = document.createElement('input')
+//   inp.setAttribute('type', 'hidden')
+//   inp.setAttribute('id', 'XY_' + data.code)
+//   inp.setAttribute('value', '')
+//   cell.appendChild(inp)
+//   inp = document.createElement('input')
+//   inp.setAttribute('hidden', '')
+//   inp.setAttribute('id', 'input_' + data.code)
+//   inp.setAttribute('value', '')
+//   cell.appendChild(inp)
 
-  row = table.insertRow(idx)
-  row.setAttribute('style', 'display:none')
-  idx += 1
-  // row.setAttribute("style", "display:none");
-  cell = row.insertCell(0)
-  cell.setAttribute('colspan', 2)
-  const img = document.createElement('img')
-  img.src = data.filename
-  img.setAttribute('id', 'img_' + data.code)
-  img.setAttribute('class', 'field-image-src')
-  img.setAttribute('onload', 'drawFields()')
-  // img.setAttribute("onclick", "onFieldClick(event)");
-  img.setAttribute('hidden', '')
-  cell.appendChild(img)
-}
+//   row = table.insertRow(idx)
+//   row.setAttribute('style', 'display:none')
+//   idx += 1
+//   // row.setAttribute("style", "display:none");
+//   cell = row.insertCell(0)
+//   cell.setAttribute('colspan', 2)
+//   const img = document.createElement('img')
+//   img.src = data.filename
+//   img.setAttribute('id', 'img_' + data.code)
+//   img.setAttribute('class', 'field-image-src')
+//   img.setAttribute('onload', 'drawFields()')
+//   // img.setAttribute("onclick", "onFieldClick(event)");
+//   img.setAttribute('hidden', '')
+//   cell.appendChild(img)
+// }
 
 function addText (table, idx, name, data) {
   const row = table.insertRow(idx)
@@ -153,6 +153,31 @@ function addText (table, idx, name, data) {
   }
   if (Object.prototype.hasOwnProperty.call(data, 'disabled')) {
     inp.setAttribute('disabled', '')
+  }
+  cell2.appendChild(inp)
+  return idx + 1
+}
+
+function addTextLarge (table, idx, name, data) {
+  const row = table.insertRow(idx)
+  const cell1 = row.insertCell(0)
+  cell1.classList.add('title')
+  if (!Object.prototype.hasOwnProperty.call(data, 'code')) {
+    cell1.innerHTML = `Error: No code specified for ${name}`
+    return idx + 1
+  }
+  const cell2 = row.insertCell(1)
+  cell1.innerHTML = name + '&nbsp;'
+  cell2.classList.add('field')
+  const inp = document.createElement('textarea')
+  inp.setAttribute('id', 'input_' + data.code)
+  inp.setAttribute('type', 'text')
+  inp.setAttribute('name', data.code)
+  if (Object.prototype.hasOwnProperty.call(data, 'size')) {
+    inp.setAttribute('size', data.size)
+  }
+  if (Object.prototype.hasOwnProperty.call(data, 'maxSize')) {
+    inp.setAttribute('maxLength', data.maxSize)
   }
   cell2.appendChild(inp)
   return idx + 1
@@ -293,8 +318,6 @@ function addElement (table, idx, name, data) {
              (data.type === 'number')
   ) {
     idx = addNumber(table, idx, name, data)
-  } else if (data.type === 'field_image') {
-    idx = addFieldImage(table, idx, name, data)
   } else if ((data.type === 'bool') ||
              (data.type === 'checkbox') ||
              (data.type === 'pass_fail')
@@ -302,6 +325,8 @@ function addElement (table, idx, name, data) {
     idx = addCheckbox(table, idx, name, data)
   } else if (data.type === 'counter') {
     idx = addCounter(table, idx, name, data)
+  } else if (data.type === 'text_large') {
+    idx = addTextLarge(table, idx, name, data)
   } else {
     console.log(`Unrecognized type: ${data.type}`)
   }

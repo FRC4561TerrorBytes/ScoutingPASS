@@ -56,12 +56,6 @@ const configData = `
         "type":"team",
         "min":1,
         "max":99999
-      },
-      "Auto Start Position": {
-        "code":"as",
-        "title": "Auto Start Position",
-        "type":"field_image",
-        "filename":"2022/field_image.png"
       }
     },
     "auton": {
@@ -89,11 +83,6 @@ const configData = `
         "code":"ad",
         "title": "Lower Cargo Scored",
         "type":"counter"
-      },
-      "Auto Acquired Cargo": {
-        "code":"ac",
-        "title": "Picked up more cargo?",
-        "type":"bool"
       }
     },
     "teleop": {
@@ -117,29 +106,12 @@ const configData = `
         "title": "Lower Cargo Scored",
         "type":"counter"
       },
-      "Was Defended Against": {
-        "code":"wd",
-        "title": "Was Defended",
-        "type":"bool"
-      },
-      "Cargo Intake From": {
-        "code":"cif",
-        "title": "Cargo Intake From",
-        "type":"radio",
-        "choices":{
-          "t":"Terminal<br>",
-          "g":"Ground<br>",
-          "b":"Both<br>",
-          "x":"Not Attempted"
-        },
-        "defaultValue":"x"
-      },
-      "Shooting Spot": {
-        "code":"ss",
-        "title": "Shooting Spot",
-        "type":"field_image",
+      "Defense": {
+        "code":"de",
+        "title": "Defense",
+        "type":"text_large",
         "size":15,
-        "filename":"2022/field_image.png"
+        "maxSize":50
       }
     },
     "endgame": {
@@ -189,20 +161,10 @@ const configData = `
         },
         "defaultValue":"x"
       },
-      "Shot enemy balls away?": {
-        "code":"ba",
-        "title": "Shot enemy balls away?",
-        "type":"bool"
-      },
-      "Died/Tipped": {
-        "code":"d",
-        "title": "Died/Tipped",
-        "type":"bool"
-      },
       "Comments": {
         "code":"co",
         "title": "Comments",
-        "type":"text",
+        "type":"text_large",
         "size":15,
         "maxSize":50
       },
