@@ -71,7 +71,7 @@ const configData = `
       },
       "Upper Cargo Scored": {
         "code":"us",
-        "title": "Uppoer Cargo Scored",
+        "title": "Upper Cargo Scored",
         "type":"counter"
       },
       "Lower Cargo Attempted": {
@@ -115,16 +115,15 @@ const configData = `
       }
     },
     "endgame": {
-      "Climb": {
+      "Highest Attempted Climb": {
         "code":"c",
-        "title": "Climb",
+        "title": "Highest Attempted Climb",
         "type":"radio",
         "choices":{
-          "1":"Low<br>",
-          "2":"Mid<br>",
-          "3":"High<br>",
-          "4":"Traversal<br>",
-          "f":"Attempted<br>",
+          "4":"Low<br>",
+          "6":"Mid<br>",
+          "10":"High<br>",
+          "15":"Traversal<br>",
           "x":"Not Attempted"
         },
         "defaultValue":"x"
@@ -134,10 +133,10 @@ const configData = `
         "title": "Last succcessful rung",
         "type":"radio",
         "choices":{
-          "1":"Low<br>",
-          "2":"Mid<br>",
-          "3":"High<br>",
-          "4":"Traversal<br>",
+          "4":"Low<br>",
+          "6":"Mid<br>",
+          "10":"High<br>",
+          "15":"Traversal<br>",
           "x":"Not Successful/Attempted"
         },
         "defaultValue":"x"
