@@ -105,13 +105,6 @@ const configData = `
         "code":"tl",
         "title": "Lower Cargo Scored",
         "type":"counter"
-      },
-      "Defense": {
-        "code":"de",
-        "title": "Defense",
-        "type":"text_large",
-        "size":15,
-        "maxSize":50
       }
     },
     "endgame": {
@@ -159,6 +152,13 @@ const configData = `
           "x":"Dunno"
         },
         "defaultValue":"x"
+      },
+      "Defense": {
+        "code":"de",
+        "title": "Defense",
+        "type":"text_large",
+        "size":15,
+        "maxSize":50
       },
       "Comments": {
         "code":"co",
