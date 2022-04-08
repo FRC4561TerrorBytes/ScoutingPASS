@@ -620,7 +620,7 @@ function clearForm () { // eslint-disable-line
         document.getElementById('display_' + code.substr(0, radio)).value = ''
       }
     } else {
-      if (e.type === 'number' || e.type === 'text' || e.type === 'hidden') {
+      if (e.type === 'number' || e.type === 'text' || e.type === 'hidden' || e.type === 'text_large') {
         if (e.className === 'counter') {
           e.value = 0
         } else {
@@ -631,7 +631,7 @@ function clearForm () { // eslint-disable-line
           e.checked = false
         }
       } else {
-        console.log('unsupported input type')
+        console.log('Unsupported input type')
       }
     }
   }
