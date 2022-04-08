@@ -631,7 +631,7 @@ function clearForm () { // eslint-disable-line
           e.checked = false
         }
       } else {
-        console.log('Unsupported input type')
+        console.log('Unsupported input type!')
       }
     }
   }
