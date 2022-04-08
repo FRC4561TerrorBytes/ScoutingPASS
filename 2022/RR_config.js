@@ -56,6 +56,12 @@ const configData = `
         "type":"team",
         "min":1,
         "max":99999
+      },
+      "Auto Start Position": {
+        "code":"as",
+        "title": "Auto Start Position",
+        "type":"field_image",
+        "filename":"2022/field_image.png"
       }
     },
     "auton": {
@@ -105,6 +111,12 @@ const configData = `
         "code":"tl",
         "title": "Lower Cargo Scored",
         "type":"counter"
+      },
+      "Shooting Spot": {
+        "code":"ss",
+        "title": "Shooting Spot",
+        "type":"field_image",
+        "filename":"2022/field_image.png"
       }
     },
     "endgame": {

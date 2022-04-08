@@ -17,7 +17,7 @@ const options = { // eslint-disable-line
 }
 
 // Must be filled in: e=event, m=match#, l=level(q,qf,sf,f), t=team#, r=robot(r1,r2,b1..), s=scouter
-const requiredFieldsMap = {e: 'Event', m: 'Match', l: 'Match Level', r: 'Robot', s: 'Scouter Initials'}
+const requiredFieldsMap = {e: 'Event', m: 'Match', l: 'Match Level', r: 'Robot', s: 'Scouter Initials', as: 'Auto Start Position'}
 
 function addCounter (table, idx, name, data) {
   const row = table.insertRow(idx)
@@ -57,71 +57,71 @@ function addCounter (table, idx, name, data) {
   return idx + 1
 }
 
-// function addFieldImage (table, idx, name, data) {
-//   let row = table.insertRow(idx)
-//   idx += 1
-//   let cell = row.insertCell(0)
-//   cell.setAttribute('colspan', 2)
-//   cell.setAttribute('style', 'text-align: center;')
-//   cell.innerHTML = name
+function addFieldImage (table, idx, name, data) {
+  let row = table.insertRow(idx)
+  idx += 1
+  let cell = row.insertCell(0)
+  cell.setAttribute('colspan', 2)
+  cell.setAttribute('style', 'text-align: center;')
+  cell.innerHTML = name
 
-//   row = table.insertRow(idx)
-//   idx += 1
-//   cell = row.insertCell(0)
-//   cell.setAttribute('colspan', 2)
-//   cell.setAttribute('style', 'text-align: center;')
-//   const undoButton = document.createElement('button')
-//   undoButton.setAttribute('type', 'checkbox')
-//   undoButton.setAttribute('onclick', 'undo(this.parentElement)')
-//   undoButton.innerHTML += 'Undo'
-//   undoButton.setAttribute('id', 'undo_' + data.code)
-//   undoButton.setAttribute('class', 'undoButton')
-//   cell.appendChild(undoButton)
+  row = table.insertRow(idx)
+  idx += 1
+  cell = row.insertCell(0)
+  cell.setAttribute('colspan', 2)
+  cell.setAttribute('style', 'text-align: center;')
+  const undoButton = document.createElement('button')
+  undoButton.setAttribute('type', 'checkbox')
+  undoButton.setAttribute('onclick', 'undo(this.parentElement)')
+  undoButton.innerHTML += 'Undo'
+  undoButton.setAttribute('id', 'undo_' + data.code)
+  undoButton.setAttribute('class', 'undoButton')
+  cell.appendChild(undoButton)
 
-//   row = table.insertRow(idx)
-//   idx += 1
-//   cell = row.insertCell(0)
-//   cell.setAttribute('colspan', 2)
-//   cell.setAttribute('style', 'text-align: center;')
-//   const canvas = document.createElement('canvas')
-//   // canvas.onclick = onFieldClick;
-//   canvas.setAttribute('onclick', 'onFieldClick(event)')
-//   canvas.setAttribute('class', 'field-image-src')
-//   canvas.setAttribute('id', 'canvas_' + data.code)
-//   canvas.innerHTML = 'No canvas support'
-//   cell.appendChild(canvas)
+  row = table.insertRow(idx)
+  idx += 1
+  cell = row.insertCell(0)
+  cell.setAttribute('colspan', 2)
+  cell.setAttribute('style', 'text-align: center;')
+  const canvas = document.createElement('canvas')
+  // canvas.onclick = onFieldClick;
+  canvas.setAttribute('onclick', 'onFieldClick(event)')
+  canvas.setAttribute('class', 'field-image-src')
+  canvas.setAttribute('id', 'canvas_' + data.code)
+  canvas.innerHTML = 'No canvas support'
+  cell.appendChild(canvas)
 
-//   row = table.insertRow(idx)
-//   idx += 1
-//   row.setAttribute('style', 'display:none')
-//   cell = row.insertCell(0)
-//   cell.setAttribute('colspan', 2)
-//   let inp = document.createElement('input')
-//   inp.setAttribute('type', 'hidden')
-//   inp.setAttribute('id', 'XY_' + data.code)
-//   inp.setAttribute('value', '')
-//   cell.appendChild(inp)
-//   inp = document.createElement('input')
-//   inp.setAttribute('hidden', '')
-//   inp.setAttribute('id', 'input_' + data.code)
-//   inp.setAttribute('value', '')
-//   cell.appendChild(inp)
+  row = table.insertRow(idx)
+  idx += 1
+  row.setAttribute('style', 'display:none')
+  cell = row.insertCell(0)
+  cell.setAttribute('colspan', 2)
+  let inp = document.createElement('input')
+  inp.setAttribute('type', 'hidden')
+  inp.setAttribute('id', 'XY_' + data.code)
+  inp.setAttribute('value', '')
+  cell.appendChild(inp)
+  inp = document.createElement('input')
+  inp.setAttribute('hidden', '')
+  inp.setAttribute('id', 'input_' + data.code)
+  inp.setAttribute('value', '')
+  cell.appendChild(inp)
 
-//   row = table.insertRow(idx)
-//   row.setAttribute('style', 'display:none')
-//   idx += 1
-//   // row.setAttribute("style", "display:none");
-//   cell = row.insertCell(0)
-//   cell.setAttribute('colspan', 2)
-//   const img = document.createElement('img')
-//   img.src = data.filename
-//   img.setAttribute('id', 'img_' + data.code)
-//   img.setAttribute('class', 'field-image-src')
-//   img.setAttribute('onload', 'drawFields()')
-//   // img.setAttribute("onclick", "onFieldClick(event)");
-//   img.setAttribute('hidden', '')
-//   cell.appendChild(img)
-// }
+  row = table.insertRow(idx)
+  row.setAttribute('style', 'display:none')
+  idx += 1
+  // row.setAttribute("style", "display:none");
+  cell = row.insertCell(0)
+  cell.setAttribute('colspan', 2)
+  const img = document.createElement('img')
+  img.src = data.filename
+  img.setAttribute('id', 'img_' + data.code)
+  img.setAttribute('class', 'field-image-src')
+  img.setAttribute('onload', 'drawFields()')
+  // img.setAttribute("onclick", "onFieldClick(event)");
+  img.setAttribute('hidden', '')
+  cell.appendChild(img)
+}
 
 function addText (table, idx, name, data) {
   const row = table.insertRow(idx)
@@ -317,6 +317,9 @@ function addElement (table, idx, name, data) {
              (data.type === 'number')
   ) {
     idx = addNumber(table, idx, name, data)
+  } else if (data.type === 'field_image') 
+  {
+    idx = addFieldImage(table, idx, name, data)
   } else if ((data.type === 'bool') ||
              (data.type === 'checkbox') ||
              (data.type === 'pass_fail')
