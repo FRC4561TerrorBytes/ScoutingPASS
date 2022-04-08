@@ -1,4 +1,3 @@
-Attribute VB_Name = "QRReader"
 Sub process1QRCodeInput()
     saveData (getInput())
 End Sub
@@ -17,7 +16,7 @@ Public Function getInput()
 End Function
 
 Sub testSaveData()
-    saveData ("s=fff;e=1234;l=qm;m=1234;r=r1;t=1234;as=;ae=Y;al=2;tu=1;ta=2;ao=2;ai=1;aa=Y;at=N;ax=Y;lp=2;op=1;ip=3;rc=pass;f=0;pc=pass;ss=;c=pass;b=N;ca=x;cb=x;cs=slow;p=N;ds=x;dr=x;pl=x;tr=N;wd=N;if=N;d=N;to=N;be=N;cf=N")
+    saveData ("s=nm;e=2022ncgui;l=qm;m=2;r=r1;t=4561;as=[22];at=Y;au=1;us=1;al=1;ad=1;ta=2;ss=[2,44];tu=2;tc=2;tl=2;de=OffenseYes;c=x;lsr=x;be=Y;dr=x;co=OffenseDefense;cnf=n")
 End Sub
 
 Public Function ArrayLen(arr As Variant) As Integer
@@ -47,15 +46,28 @@ Sub saveData(inp As String)
     mapper.Add "m", "matchNumber"
     mapper.Add "r", "robot"
     mapper.Add "t", "teamNumber"
-
-    ' Additional custom mapping
-    'mapper.Add "f", "fouls"
-    'mapper.Add "c", "climb"
-    'mapper.Add "dr", "defenseRating"
-    'mapper.Add "d", "died"
-    'mapper.Add "to", "tippedOver"
-    'mapper.Add "cf", "cardFouls"
-    'mapper.Add "co", "comments"
+    mapper.Add "as", "autoStart"
+    
+    mapper.Add "al", "AlowerCargoAttempted"
+    mapper.Add "ad", "AlowerCargoScored"
+    mapper.Add "au", "AupperCargoAttempted"
+    mapper.Add "us", "AupperCargoScored"
+    
+    mapper.Add "tc", "TlowerCargoAttempted"
+    mapper.Add "tl", "TlowerCargoScored"
+    mapper.Add "ta", "TupperCargoAttempted"
+    mapper.Add "tu", "TupperCargoScored"
+    
+    mapper.Add "dr", "defenseRating"
+    mapper.Add "de", "defense"
+    mapper.Add "co", "comments"
+    mapper.Add "c", "highestAttemptedClimb"
+    mapper.Add "lsr", "lastSuccessfulRung"
+    mapper.Add "cnf", "startedClimbBeforeEndgame"
+    mapper.Add "be", "confidenceRating"
+    mapper.Add "at", "taxi"
+    mapper.Add "ss", "shootingSpot"
+    
     
     If inp = "" Then
         Exit Sub
@@ -74,6 +86,9 @@ Sub saveData(inp As String)
             par = Split(str, "=")
             key = par(0)
             value = par(1)
+            If value = "x" Then
+                value = 0
+            End If
             If mapper.Exists(key) Then
                 key = mapper(key)
             End If
@@ -100,7 +115,7 @@ Sub saveData(inp As String)
             'Set table = ws.ListObjects(tableName)
         Else
             Dim tablerange As Range
-            ws.ListObjects.Add(xlSrcRange, Range("A1:AO1"), , xlYes).Name = tableName
+            ws.ListObjects.Add(xlSrcRange, Range("A1:AZtc1"), , xlYes).Name = tableName
             i = 0
             Set table = ws.ListObjects(tableName)
             For Each key In data.Keys
@@ -118,3 +133,4 @@ Sub saveData(inp As String)
         Next
     End If
 End Sub
+
