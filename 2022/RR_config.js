@@ -146,10 +146,10 @@ const configData = `
         },
         "defaultValue":"x"
       },
-      "Started Climb before Endgame": {
+      "Climb Start (Time)": {
         "code":"be",
-        "title": "Started climb before EndGame",
-        "type":"bool"
+        "title": "Climb Start (Time)",
+        "type":"counter"
       }
     },
     "postmatch": {
