@@ -15,7 +15,7 @@ const configData = `
       "Event":{
         "code":"e",
         "type":"event",
-        "defaultValue":"2022nccmp",
+        "defaultValue":"2022carv",
         "required":"true",
         "disabled":"true"
       },
